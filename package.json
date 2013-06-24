@@ -1,6 +1,6 @@
 {
   "name": "browserify-string",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Run browserify over a string or an inline function",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,10 @@
     "mocha": "~1.11.0",
     "domready": "~0.2.11"
   },
+  "peerDependencies": {
+    "browserify": "~2.20.0"
+  },
   "dependencies": {
-    "browserify": "~2.20.0",
     "through": "~2.3.4"
   },
   "directories": {
