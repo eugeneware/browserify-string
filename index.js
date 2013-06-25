@@ -1,6 +1,18 @@
 var browserify = require('browserify')
   , path = require('path')
-  , through = require('through');
+  , through = require('through')
+  , fs = require('fs')
+  , path = require('path');
+
+var empty = path.join(process.cwd(), '.__empty.js');
+ensureEmpty();
+
+function ensureEmpty() {
+  fs.exists(empty, function (exists) {
+    if (exists) return;
+    fs.writeFile(empty, '');
+  });
+}
 
 module.exports = exports = browserifyStrOrFn;
 function browserifyStrOrFn(strOrFn) {
@@ -12,7 +24,6 @@ function browserifyStrOrFn(strOrFn) {
       ')();'
     ].join('\n');
   }
-  var empty = path.resolve(__dirname, 'empty.js');
   return browserify()
     .add(empty)
     .transform(function (file) {
