@@ -1,6 +1,6 @@
 {
   "name": "browserify-string",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Run browserify over a string or an inline function",
   "main": "index.js",
   "scripts": {
