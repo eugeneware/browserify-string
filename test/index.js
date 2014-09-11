@@ -35,4 +35,22 @@ describe('Browserify String', function () {
           done();
         });
     });
+
+  it('should be able to return a browserify with options',
+    function(done) {
+      function browserCode() {
+        var domready = require('domready');
+        domready(function () {
+          console.log('ready');
+        });
+      }
+      browserifyFn(browserCode.toString(), { debug: true })
+        .bundle(function (err, src) {
+          if (err) return done(err);
+          expect(src.toString()).to.include(browserCode.toString());
+          expect(src.toString()).to.include('domready (c) Dustin Diaz');
+          expect(src.toString()).to.include('//# sourceMappingURL=data:application/json;base64');
+          done();
+        });
+    });
 });
