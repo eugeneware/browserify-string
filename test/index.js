@@ -13,8 +13,8 @@ describe('Browserify String', function () {
       browserifyFn(browserCode)
         .bundle(function (err, src) {
           if (err) return done(err);
-          expect(src).to.include(browserCode.toString());
-          expect(src).to.include('domready (c) Dustin Diaz 2012 - License MIT');
+          expect(src.toString()).to.include(browserCode.toString());
+          expect(src.toString()).to.include('domready (c) Dustin Diaz');
           done();
         });
     });
@@ -30,8 +30,8 @@ describe('Browserify String', function () {
       browserifyFn(browserCode.toString())
         .bundle(function (err, src) {
           if (err) return done(err);
-          expect(src).to.include(browserCode.toString());
-          expect(src).to.include('domready (c) Dustin Diaz 2012 - License MIT');
+          expect(src.toString()).to.include(browserCode.toString());
+          expect(src.toString()).to.include('domready (c) Dustin Diaz');
           done();
         });
     });
