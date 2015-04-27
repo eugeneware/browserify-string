@@ -13,15 +13,15 @@
   "author": "Eugene Ware <eugene@noblesamurai.com>",
   "license": "BSD",
   "devDependencies": {
-    "chai": "^1.9.1",
-    "mocha": "^1.21.4",
+    "chai": "^2.2.0",
+    "mocha": "^2.2.4",
     "domready": "^1.0.6"
   },
   "peerDependencies": {
-    "browserify": ">=2.20.0"
+    "browserify": ">=9.0.8"
   },
   "dependencies": {
-    "through": "~2.3.4"
+    "through": "~2.3.7"
   },
   "directories": {
     "test": "test"
