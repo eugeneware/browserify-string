@@ -13,9 +13,10 @@
   "author": "Eugene Ware <eugene@noblesamurai.com>",
   "license": "BSD",
   "devDependencies": {
+    "browserify": "^10.2.4",
     "chai": "^2.2.0",
-    "mocha": "^2.2.4",
-    "domready": "^1.0.6"
+    "domready": "^1.0.6",
+    "mocha": "^2.2.4"
   },
   "peerDependencies": {
     "browserify": ">=9.0.8"
