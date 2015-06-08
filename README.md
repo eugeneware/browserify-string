@@ -1,4 +1,4 @@
-# browserify-string
+# browserify-string [![Build Status](https://travis-ci.org/eugeneware/browserify-string.svg?branch=master)](https://travis-ci.org/eugeneware/browserify-string)
 
 Use [browserify](https://github.com/substack/node-browserify) programatically to deal with code strings or inline functions.
 (By default browserify requires that you have your code in a file.)

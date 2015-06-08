@@ -1,5 +1,5 @@
 var domready = require('domready');
 
 domready(function () {
-  console.log('hello');
+  console.log('Hello World');
 });

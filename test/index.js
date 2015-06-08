@@ -7,7 +7,7 @@ describe('Browserify String', function () {
       function browserCode() {
         var domready = require('domready');
         domready(function () {
-          console.log('ready');
+          console.log('Hello World');
         });
       }
       browserifyFn(browserCode)
@@ -24,7 +24,7 @@ describe('Browserify String', function () {
       function browserCode() {
         var domready = require('domready');
         domready(function () {
-          console.log('ready');
+          console.log('Hello World');
         });
       }
       browserifyFn(browserCode.toString())
@@ -41,15 +41,15 @@ describe('Browserify String', function () {
       function browserCode() {
         var domready = require('domready');
         domready(function () {
-          console.log('ready');
+          console.log('Hello World');
         });
       }
       browserifyFn(browserCode.toString(), { debug: true })
         .bundle(function (err, src) {
           if (err) return done(err);
-          expect(src.toString()).to.include(browserCode.toString());
+          expect(src.toString()).to.include('Hello World');
           expect(src.toString()).to.include('domready (c) Dustin Diaz');
-          expect(src.toString()).to.include('//# sourceMappingURL=data:application/json;base64');
+          expect(src.toString()).to.include('# sourceMappingURL');
           done();
         });
     });
