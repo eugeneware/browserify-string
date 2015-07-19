@@ -47,9 +47,8 @@ describe('Browserify String', function () {
       browserifyFn(browserCode.toString(), { debug: true })
         .bundle(function (err, src) {
           if (err) return done(err);
-          expect(src.toString()).to.include(browserCode.toString());
           expect(src.toString()).to.include('domready (c) Dustin Diaz');
-          expect(src.toString()).to.include('//# sourceMappingURL=data:application/json;base64');
+          expect(src.toString()).to.include('sourceMappingURL=data');
           done();
         });
     });
