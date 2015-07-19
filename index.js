@@ -5,12 +5,6 @@ var browserify = require('browserify')
   , path = require('path')
   , temp = require('temp').track();
 
-function ensureEmpty(filepath) {
-  if (!fs.existsSync(filepath)) {
-    fs.writeFileSync(filepath, '');
-  }
-}
-
 module.exports = exports = browserifyStrOrFn;
 function browserifyStrOrFn(strOrFn, opts) {
   // Prepare the options.
