@@ -2,19 +2,21 @@ var browserify = require('browserify')
   , path = require('path')
   , through = require('through')
   , fs = require('fs')
-  , path = require('path');
+  , path = require('path')
+  , temp = require('temp').track();
 
-var empty = path.join(process.cwd(), '.__browserify_string_empty.js');
-ensureEmpty();
-
-function ensureEmpty() {
-  if (!fs.existsSync(empty)) {
-    fs.writeFileSync(empty, '');
+function ensureEmpty(filepath) {
+  if (!fs.existsSync(filepath)) {
+    fs.writeFileSync(filepath, '');
   }
 }
 
 module.exports = exports = browserifyStrOrFn;
 function browserifyStrOrFn(strOrFn, opts) {
+  // Prepare the options.
+  opts = opts || {};
+
+  // Clean up the input.
   var str = strOrFn;
   if (typeof strOrFn === 'function') {
     str = [
@@ -23,10 +25,22 @@ function browserifyStrOrFn(strOrFn, opts) {
       ')();'
     ].join('\n');
   }
+
+  // Create an empty file in /tmp.
+  var tmp = temp.openSync();
+  var filepath = tmp.path;
+  fs.writeFileSync(filepath, '');
+
+  // Add available other module paths to opts.path.
+  opts.paths = opts.paths || []
+  opts.paths.push('.')
+  opts.paths.push('node_modules')
+
+  // Process the input with Browserify.
   return browserify(opts)
-    .add(empty)
+    .add(filepath)
     .transform(function (file) {
-      if (file !== empty) {
+      if (file !== filepath) {
         return through();
       }
       var t = through(
