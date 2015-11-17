@@ -1,17 +1,7 @@
 var browserify = require('browserify')
   , path = require('path')
-  , through = require('through')
-  , fs = require('fs')
+  , Readable = require('stream').Readable
   , path = require('path');
-
-var empty = path.join(process.cwd(), '.__browserify_string_empty.js');
-ensureEmpty();
-
-function ensureEmpty() {
-  if (!fs.existsSync(empty)) {
-    fs.writeFileSync(empty, '');
-  }
-}
 
 module.exports = exports = browserifyStrOrFn;
 function browserifyStrOrFn(strOrFn, opts) {
@@ -23,18 +13,11 @@ function browserifyStrOrFn(strOrFn, opts) {
       ')();'
     ].join('\n');
   }
-  return browserify(opts)
-    .add(empty)
-    .transform(function (file) {
-      if (file !== empty) {
-        return through();
-      }
-      var t = through(
-        function (data) { },
-        function () {
-          this.queue(str);
-          this.queue(null);
-        });
-      return t;
-    });
+
+  // Create a stream from the input string.
+  var stream = new Readable();
+  stream.push(str);
+  stream.push(null); // Indicate the end of the stream.
+
+  return browserify(stream, opts);
 }
