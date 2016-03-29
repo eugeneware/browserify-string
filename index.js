@@ -2,19 +2,13 @@ var browserify = require('browserify')
   , path = require('path')
   , through = require('through')
   , fs = require('fs')
-  , path = require('path');
-
-var empty = path.join(process.cwd(), '.__browserify_string_empty.js');
-ensureEmpty();
-
-function ensureEmpty() {
-  if (!fs.existsSync(empty)) {
-    fs.writeFileSync(empty, '');
-  }
-}
+  , path = require('path')
+  , os = require('os');
 
 module.exports = exports = browserifyStrOrFn;
+
 function browserifyStrOrFn(strOrFn, opts) {
+  var empty = path.join(__dirname, 'empty.js');
   var str = strOrFn;
   if (typeof strOrFn === 'function') {
     str = [
